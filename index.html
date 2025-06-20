@@ -1,91 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Tedditory Co.</title>
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        <!-- <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#page-top">Tedditory Co.</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tedditory</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Tailwind CDN with dark mode class support -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+  </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+  <!-- Header -->
+  <header class="w-full">
+    <nav class="flex justify-between items-center max-w-4xl mx-auto px-6 py-4">
+      <a href="/" class="text-2xl font-semibold tracking-tight">tedditory.co</a>
+
+      <div class="flex items-center space-x-2">
+        <!-- Mobile menu button -->
+        <button id="menu-btn" class="sm:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" aria-label="Toggle navigation">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <!-- Desktop nav links -->
+        <ul id="nav-links" class="hidden sm:flex space-x-6 text-sm font-medium">
+          <li><a class="hover:underline" href="#socials">Socials</a></li>
+          <li><a class="hover:underline" href="#projects">Projects</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Mobile nav links -->
+    <ul id="mobile-nav" class="sm:hidden hidden flex-col items-start space-y-3 px-6 pb-4 text-sm font-medium">
+      <li><a class="hover:underline" href="#socials">Socials</a></li>
+      <li><a class="hover:underline" href="#projects">Projects</a></li>
+    </ul>
+  </header>
+
+  <!-- Main content -->
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
+    <!-- Socials section -->
+    <section id="socials">
+      <h2 class="text-xl font-medium mb-6">Socials</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- LinkedIn -->
+        <a href="https://www.linkedin.com/in/thinhnguyenvo" target="_blank" rel="noopener noreferrer" class="group">
+          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
+            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 mb-4">
+              <span class="text-base font-semibold text-blue-600 dark:text-blue-300">in</span>
             </div>
-        </nav> -->
-        <!-- Masthead-->
-        <header class="masthead">
-            <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
-                <div class="d-flex justify-content-center">
-                    <div class="text-center">
-                        <h1 class="mx-auto my-0 text-uppercase">Tedditory</h1>
-                        <h2 class="text-white-50 mx-auto mt-2 mb-5">👨‍💻 Seattle Techie 🇻🇳 Vietnamese Roots 🎵 Beats & Bytes 🏡 Real Estate Enthusiast</h2>
-                        <a class="btn btn-primary" href="#main">Tedditory More</a>
-                    </div>
-                </div>
+            <h3 class="text-lg font-semibold">LinkedIn</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Work & professional stuffs</p>
+          </div>
+        </a>
+        <!-- Instagram -->
+        <a href="https://instagram.com/tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
+          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
+            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-pink-100 dark:bg-pink-900 mb-4">
+              <span class="text-base font-semibold text-pink-600 dark:text-pink-300">ig</span>
             </div>
-        </header>
-        <!-- Contact-->
-        <section class="contact-section bg-black" id="main">
-            <div class="container px-4 px-lg-5">
-                <div class="row gx-4 gx-lg-5">
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i class="fas fa-book-bookmark text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Tedditory's Takeaway</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="https://takeaway.tedditory.co" target="_blank">Personal Blog</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i class="fas fa-user-group text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Tedditory's Alliance</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="https://alliance.tedditory.co" target="_blank">Coaching Service</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
-                            <div class="card-body text-center">
-                                <i class="fas fa-house-user text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Tedditory's Retreat</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="https://retreat.tedditory.co" target="_blank">Furnished Rental</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="social d-flex justify-content-center">
-                    <a class="mx-2" href="https://linkedin.com/in/thinhnguyenvo/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <!-- <a class="mx-2" href="https://facebook.com/th.nguyenvo/" target="_blank"><i class="fab fa-facebook-f"></i></a> -->
-                    <a class="mx-2" href="https://instagram.com/tedditory.co/" target="_blank"><i class="fab fa-instagram"></i></a>
-                </div>
+            <h3 class="text-lg font-semibold">Instagram</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Anything beyond LinkedIn</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Projects section -->
+    <section id="projects">
+      <h2 class="text-xl font-medium mb-6">Projects</h2>
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Retreat house main link -->
+        <a href="https://retreat.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
+          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
+            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900 mb-4">
+              <span class="text-lg">🏡</span>
             </div>
-        </section>
-        <!-- Footer-->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Tedditory Co. 2024</div></footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-    </body>
+            <h3 class="text-lg font-semibold">Tedditory's Retreat</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Elevated room-sharing for monthly stays</p>
+          </div>
+        </a>
+
+        <a href="https://hoi.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
+          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
+            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 mb-4">
+              <span class="text-lg">🤖</span>
+            </div>
+            <h3 class="text-lg font-semibold">Hỏi</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Ask anything about Ted (personal RAG-based chat bot)</p>
+          </div>
+        </a>
+
+        <a href="https://takeaways.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
+          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
+            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900 mb-4">
+              <span class="text-lg">📓</span>
+            </div>
+            <h3 class="text-lg font-semibold">Tedditory's Takeaways</h3>
+            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Random thoughts</p>
+          </div>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-xs text-gray-500 dark:text-gray-400">
+    &copy; 2025 Ted Nguyen. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Mobile nav toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden');
+    });
+  </script>
+</body>
 </html>
