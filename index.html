@@ -3,121 +3,406 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tedditory</title>
+  <meta name="theme-color" content="#FBFBFD" />
+
+  <title>Tedditory — Ted Nguyen</title>
+  <meta name="description" content="A software engineer's side projects: elevated room-sharing in Seattle, and writing on career and money." />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Tedditory" />
+  <meta property="og:url" content="https://tedditory.co/" />
+  <meta property="og:title" content="Tedditory — Ted Nguyen" />
+  <meta property="og:description" content="A software engineer's side projects: elevated room-sharing in Seattle, and writing on career and money." />
+  <meta property="og:image" content="https://tedditory.co/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Tedditory — Ted Nguyen" />
+  <meta name="twitter:description" content="A software engineer's side projects: elevated room-sharing in Seattle, and writing on career and money." />
+  <meta name="twitter:image" content="https://tedditory.co/assets/og-image.png" />
+
   <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-  <!-- Tailwind CDN with dark mode class support -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="canonical" href="https://tedditory.co/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet" />
+
   <style>
-    body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    :root {
+      /* Palette shared with retreat.tedditory.co — the branded sibling.
+         Apple-clean cool neutrals with a deep-green brand accent, so the
+         hub reads as part of the same family as Retreat and Takeaways. */
+      --bg:          #FBFBFD;
+      --bg-alt:      #F5F5F7;
+      --surface:     #FFFFFF;
+      --ink:         #1D1D1F;
+      --ink-soft:    #48484A;
+      --muted:       #6E6E73;
+      --faint:       #86868B;
+      --line:        #D8D8DD;
+      --line-soft:   #E8E8ED;
+      --accent:      #8A6D1C; /* antique gold — Metal/West-group wealth color (Water Rooster, Kua 7) */
+      --accent-soft: #B8912F;
+
+      --sans:  -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:          #16171A;
+        --bg-alt:      #1D1E21;
+        --surface:     #1E1F23;
+        --ink:         #F2F2F5;
+        --ink-soft:    #C4C4C8;
+        --muted:       #9A9AA0;
+        --faint:       #6E6E74;
+        --line:        #303236;
+        --line-soft:   #26272B;
+        --accent:      #D9B65C; /* gold lifts bright on dark */
+        --accent-soft: #8A6D1C;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: clamp(3.5rem, 10vw, 6rem) clamp(1.25rem, 5vw, 2.5rem) 3rem;
+    }
+
+    /* ---------- 1. Identity ---------- */
+    .identity {
+      text-align: center;
+      margin-bottom: clamp(2.75rem, 8vw, 4.25rem);
+    }
+    .wordmark {
+      margin: 0;
+      font-weight: 700;
+      font-size: clamp(2.25rem, 8vw, 3.5rem);
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--ink);
+    }
+    .wordmark .co { color: var(--accent); }
+    .descriptor {
+      margin: 1.05rem 0 0;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: clamp(1.1rem, 3.6vw, 1.35rem);
+      color: var(--muted);
+      letter-spacing: -0.01em;
+    }
+
+    /* ---------- 2. Property cards ---------- */
+    .directory {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(1rem, 3vw, 1.5rem);
+    }
+    @media (max-width: 640px) {
+      .directory { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: clamp(1.5rem, 4vw, 2rem);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.18s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 34px -20px rgba(29,29,31,0.45);
+    }
+    .card:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.85rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .card-title {
+      margin: 0 0 0.6rem;
+      font-weight: 600;
+      font-size: clamp(1.35rem, 5vw, 1.6rem);
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .card-desc {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+      line-height: 1.55;
+    }
+    .card-cta {
+      margin: 1.5rem 0 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      transition: transform 0.18s ease;
+    }
+    .card:hover .card-cta { transform: translateX(3px); }
+
+    /* ---------- 3. Timeline ---------- */
+    .timeline {
+      margin-top: clamp(3.25rem, 9vw, 5rem);
+      /* fade both edges so the line reads as a slice of a longer one */
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 44px, #000 calc(100% - 44px), transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 44px, #000 calc(100% - 44px), transparent 100%);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+    }
+    .timeline::-webkit-scrollbar { display: none; }
+
+    .timeline-track {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      --tl-gap: clamp(0.75rem, 3vw, 1.75rem);
+      gap: var(--tl-gap);
+      min-width: max-content;
+      margin: 0;
+      padding: 1.75rem 56px 0.5rem;
+      list-style: none;
+    }
+    .event {
+      position: relative;
+      flex: 0 0 132px; /* equal width → evenly spaced dots regardless of label length */
+      text-align: center;
+      padding-top: 1.1rem;
+    }
+    /* The rule is drawn per-event and extended half a gap on each side so the
+       segments join into one continuous line. Building it this way (instead of a
+       single track-wide rule with right:0) avoids Safari clipping the tail inside
+       the overflow-x scroll container on wide screens. */
+    .event::after {
+      content: "";
+      position: absolute;
+      top: 4px; /* dot center */
+      left: calc(var(--tl-gap) / -2);
+      right: calc(var(--tl-gap) / -2);
+      height: 1px;
+      background: var(--line);
+      z-index: 0;
+    }
+    .event:first-child::after { left: -56px; }  /* fading tail past the first marker */
+    .event:last-child::after  { right: -56px; } /* fading tail past the last marker */
+
+    .event::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--faint);
+      box-shadow: 0 0 0 4px var(--bg); /* mask the line behind the dot */
+      z-index: 1; /* dot sits above the line segment */
+    }
+    .event.is-property::before { background: var(--accent); }
+
+    .event-year {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--ink);
+    }
+    .event-label {
+      margin-top: 0.25rem;
+      font-size: 0.82rem;
+      line-height: 1.3;
+      color: var(--ink-soft);
+    }
+    .event-loc {
+      margin-top: 0.15rem;
+      font-size: 0.74rem;
+      line-height: 1.3;
+      color: var(--muted);
+    }
+
+    /* ---------- 4. Social row ---------- */
+    .socials {
+      margin-top: clamp(3rem, 8vw, 4.25rem);
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .social {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      color: var(--faint);
+      transition: color 0.18s ease, background 0.18s ease;
+    }
+    .social:hover,
+    .social:focus-visible { color: var(--accent); background: var(--bg-alt); }
+    .social:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .social svg { width: 20px; height: 20px; }
+
+    /* ---------- 5. Footer ---------- */
+    footer {
+      margin-top: clamp(3rem, 8vw, 4rem);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
   </style>
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-  <!-- Header -->
-  <header class="w-full">
-    <nav class="flex justify-between items-center max-w-4xl mx-auto px-6 py-4">
-      <a href="/" class="text-2xl font-semibold tracking-tight">tedditory.co</a>
+<body>
+  <main>
+    <!-- 1. Identity -->
+    <header class="identity">
+      <h1 class="wordmark">Tedditory <span class="co">Co</span></h1>
+      <p class="descriptor">An engineer, building on the side.</p>
+    </header>
 
-      <div class="flex items-center space-x-2">
-        <!-- Mobile menu button -->
-        <button id="menu-btn" class="sm:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400" aria-label="Toggle navigation">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-        <!-- Desktop nav links -->
-        <ul id="nav-links" class="hidden sm:flex space-x-6 text-sm font-medium">
-          <li><a class="hover:underline" href="#socials">Socials</a></li>
-          <li><a class="hover:underline" href="#projects">Projects</a></li>
-        </ul>
-      </div>
+    <!-- 2. Property directory -->
+    <section class="directory" aria-label="Properties">
+      <a class="card" href="https://retreat.tedditory.co">
+        <p class="eyebrow">Elevated Room-Sharing</p>
+        <h2 class="card-title">Tedditory Retreat</h2>
+        <p class="card-desc">Private bed + private bath + shared amenities = minimal modern lifestyle.</p>
+        <span class="card-cta">View the rooms →</span>
+      </a>
+
+      <a class="card" href="https://takeaways.tedditory.co">
+        <p class="eyebrow">Note Taking</p>
+        <h2 class="card-title">Tedditory Takeaways</h2>
+        <p class="card-desc">Notes on career, capital, and building things on the side.</p>
+        <span class="card-cta">Read the blog →</span>
+      </a>
+    </section>
+
+    <!-- 3. Timeline -->
+    <section class="timeline" aria-label="Timeline">
+      <ol class="timeline-track">
+        <li class="event">
+          <div class="event-year">2015</div>
+          <div class="event-label">Graduated</div>
+          <div class="event-loc">Ho Chi Minh City, Vietnam</div>
+        </li>
+        <li class="event">
+          <div class="event-year">2018</div>
+          <div class="event-label">Master's</div>
+          <div class="event-loc">Burnaby, Canada</div>
+        </li>
+        <li class="event">
+          <div class="event-year">2019</div>
+          <div class="event-label">Microsoft</div>
+          <div class="event-loc">Bellevue</div>
+        </li>
+        <li class="event is-property">
+          <div class="event-year">2022</div>
+          <div class="event-label">Tedditory Retreat</div>
+          <div class="event-loc">Seattle</div>
+        </li>
+        <li class="event is-property">
+          <div class="event-year">2024</div>
+          <div class="event-label">Tedditory Takeaways</div>
+          <div class="event-loc">Renton</div>
+        </li>
+        <li class="event">
+          <div class="event-year">2024</div>
+          <div class="event-label">Meta</div>
+          <div class="event-loc">Bellevue</div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- 4. Social row -->
+    <nav class="socials" aria-label="Social links">
+      <a class="social" href="https://instagram.com/tedditory.co/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none" />
+        </svg>
+      </a>
+      <a class="social" href="https://www.facebook.com/tedditory.co/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M14 8.5V6.9c0-.8.2-1.2 1.4-1.2H17V2.9c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.4-4 4.1v1.6H8v3h2.6V22h3.1v-8.5H16l.4-3H14z" />
+        </svg>
+      </a>
+      <a class="social" href="https://www.linkedin.com/in/thinhnguyenvo" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.4 8.6h3.1V22H3.4V8.6zM9.5 8.6h2.97v1.83h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.74V22h-3.1v-5.9c0-1.41-.03-3.22-1.96-3.22-1.96 0-2.26 1.53-2.26 3.11V22H9.5V8.6z" />
+        </svg>
+      </a>
     </nav>
-    <!-- Mobile nav links -->
-    <ul id="mobile-nav" class="sm:hidden hidden flex-col items-start space-y-3 px-6 pb-4 text-sm font-medium">
-      <li><a class="hover:underline" href="#socials">Socials</a></li>
-      <li><a class="hover:underline" href="#projects">Projects</a></li>
-    </ul>
-  </header>
 
-  <!-- Main content -->
-  <main class="max-w-4xl mx-auto px-6 py-12 space-y-16">
-    <!-- Socials section -->
-    <section id="socials">
-      <h2 class="text-xl font-medium mb-6">Socials</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/thinhnguyenvo" target="_blank" rel="noopener noreferrer" class="group">
-          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
-            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 mb-4">
-              <span class="text-base font-semibold text-blue-600 dark:text-blue-300">in</span>
-            </div>
-            <h3 class="text-lg font-semibold">LinkedIn</h3>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Work & professional stuffs</p>
-          </div>
-        </a>
-        <!-- Instagram -->
-        <a href="https://instagram.com/tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
-          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
-            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-pink-100 dark:bg-pink-900 mb-4">
-              <span class="text-base font-semibold text-pink-600 dark:text-pink-300">ig</span>
-            </div>
-            <h3 class="text-lg font-semibold">Instagram</h3>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Anything beyond LinkedIn</p>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <!-- Projects section -->
-    <section id="projects">
-      <h2 class="text-xl font-medium mb-6">Projects</h2>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <!-- Retreat house main link -->
-        <a href="https://retreat.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
-          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
-            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-green-100 dark:bg-green-900 mb-4">
-              <span class="text-lg">🏡</span>
-            </div>
-            <h3 class="text-lg font-semibold">Tedditory's Retreat</h3>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Elevated room-sharing for monthly stays</p>
-          </div>
-        </a>
-
-        <!-- <a href="https://hoi.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
-          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
-            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-purple-100 dark:bg-purple-900 mb-4">
-              <span class="text-lg">🤖</span>
-            </div>
-            <h3 class="text-lg font-semibold">Hỏi</h3>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Ask anything about Ted (personal RAG-based chat bot)</p>
-          </div>
-        </a> -->
-
-        <a href="https://takeaways.tedditory.co" target="_blank" rel="noopener noreferrer" class="group">
-          <div class="p-6 border border-gray-200 dark:border-gray-800 rounded-xl bg-white dark:bg-gray-900 shadow-sm transition-transform transform group-hover:-translate-y-1">
-            <div class="h-10 w-10 flex items-center justify-center rounded-full bg-yellow-100 dark:bg-yellow-900 mb-4">
-              <span class="text-lg">📓</span>
-            </div>
-            <h3 class="text-lg font-semibold">Tedditory's Takeaways</h3>
-            <p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Random thoughts</p>
-          </div>
-        </a>
-      </div>
-    </section>
+    <!-- 5. Footer -->
+    <footer>
+      © 2026 Ted Nguyen
+    </footer>
   </main>
 
-  <!-- Footer -->
-  <footer class="py-8 text-center text-xs text-gray-500 dark:text-gray-400">
-    &copy; 2025 Ted Nguyen. All rights reserved.
-  </footer>
-
-  <!-- Scripts -->
   <script>
-    // Mobile nav toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileNav = document.getElementById('mobile-nav');
-    menuBtn.addEventListener('click', () => {
-      mobileNav.classList.toggle('hidden');
-    });
+    // Open the timeline centered on the latest milestones rather than pinned to
+    // the right edge: find how many markers fit in the viewport, then centre the
+    // midpoint of that latest group. On wide screens ~5 show centered (2022 in
+    // the middle); on narrow screens fewer do. Re-runs once webfonts load so the
+    // measurement uses final glyph widths.
+    (function () {
+      var tl = document.querySelector('.timeline');
+      if (!tl) return;
+      function center() {
+        var events = tl.querySelectorAll('.event');
+        if (!events.length) return;
+        var cw = tl.clientWidth;
+        var first = events[0], last = events[events.length - 1];
+        var cFirst = first.offsetLeft + first.offsetWidth / 2;
+        var cLast = last.offsetLeft + last.offsetWidth / 2;
+        var step = events.length > 1 ? (cLast - cFirst) / (events.length - 1) : cw;
+        var fit = Math.max(1, Math.round(cw / step));
+        var start = events[Math.max(0, events.length - fit)];
+        var cStart = start.offsetLeft + start.offsetWidth / 2;
+        tl.scrollLeft = (cStart + cLast) / 2 - cw / 2; // browser clamps to [0, max]
+      }
+      center();
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(center);
+    })();
   </script>
 </body>
 </html>
